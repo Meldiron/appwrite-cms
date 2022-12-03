@@ -149,7 +149,11 @@
 				<!-- TODO: If label active, use queries -->
 				<a
 					href={getSearch(search, 'label', label.slug)}
-					class="flex-shrink-0 px-4 text-slate-600 rounded-md py-2 bg-slate-200 hover:bg-slate-300"
+					class={`p-1 px-3 rounded-md ${
+						data.panelLabel === label.slug
+							? 'bg-slate-900 text-white'
+							: 'bg-slate-200 text-slate-900'
+					}`}
 				>
 					{label.icon}
 					{label.name}
@@ -199,11 +203,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- TODO: Make buttons work -->
 						{#each data.panelDocuments.documents as document, i (document.$id)}
 							<tr class={`${i % 2 === 0 ? 'bg-white' : 'bg-slate-100'}`}>
 								<td class="flex items-center justify-start px-4 py-4 space-x-1">
-									<a href={`/app/panels/${panel.slug}/view`}
+									<a href={`/app/panels/${panel.slug}/view/${document.$id}`}
 										><button
 											class="p-2 rounded-md  bg-slate-200 text-slate-800 hover:bg-slate-300 "
 										>
@@ -224,7 +227,7 @@
 									>
 
 									{#if panel.editEnabled}
-										<a href={`/app/panels/${panel.slug}/edit`}>
+										<a href={`/app/panels/${panel.slug}/edit/${document.$id}`}>
 											<button class="p-2 rounded-md  bg-slate-900 text-slate-50 hover:bg-black">
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
@@ -308,7 +311,6 @@
 			</div>
 		</div>
 
-		<!-- TODO: Make pagination work -->
 		<div class="flex flex-col space-y-2">
 			<p class="text-sm text-slate-500 text-right">Pages</p>
 

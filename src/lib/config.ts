@@ -1,8 +1,10 @@
+import { Query } from 'node-appwrite';
 import {
 	createBlock,
 	createConfig,
 	createDashboard,
 	createGroup,
+	createLabel,
 	createPanel
 } from './config.builder';
 import { ListPlaintext } from './config.interfaces';
@@ -24,6 +26,21 @@ export default createConfig()
 					.setSlug('articles')
 					.setDatabaseId('638a5b81243ac70c90e7')
 					.setCollectionId('638a5b91a39e545d9cf5')
+					.addDefaultLabel()
+					.addLabel(
+						createLabel()
+							.setName('Drafts')
+							.setIcon('🖇️')
+							.setSlug('drafts')
+							.setQueries([Query.equal('status', 'draft')])
+					)
+					.addLabel(
+						createLabel()
+							.setName('Published')
+							.setIcon('⚡')
+							.setSlug('published')
+							.setQueries([Query.equal('status', 'published')])
+					)
 					.addBlock(
 						createBlock()
 							.setAttribute('author')

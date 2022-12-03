@@ -63,16 +63,22 @@ export const load: PageServerLoad = async ({ params, url }) => {
 	try {
 		const limit = +(url.searchParams.get('limit') ?? '10');
 		const page = +(url.searchParams.get('page') ?? '1');
+		const label = url.searchParams.get('label') ?? '';
+
+		const labelObj = panel.labels.find((l) => l.slug === label);
+
 		const documents = await AppwriteService.listDocuments<any>(
 			panel.databaseId,
 			panel.collectionId,
 			limit,
-			(page - 1) * limit
+			(page - 1) * limit,
+			labelObj ? labelObj.queries : []
 		);
 
 		return {
 			panelSlug: params.panelSlug,
 			panelDocuments: documents,
+			panelLabel: label,
 			panelLimit: limit,
 			panelPage: page
 		};

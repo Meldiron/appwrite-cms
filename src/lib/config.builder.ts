@@ -106,6 +106,11 @@ export class Panel {
 		return this;
 	}
 
+	addDefaultLabel() {
+		this.labels.push(createLabel().setIcon('🗄️').setName('All').setSlug('').setQueries([]));
+		return this;
+	}
+
 	addLabel(label: Label) {
 		this.labels.push(label);
 		return this;

@@ -15,10 +15,11 @@ export const AppwriteService = {
 		offset = 0,
 		queries: string[] = []
 	) => {
-		queries.push(Query.limit(limit));
-		queries.push(Query.offset(offset));
-
-		return await database.listDocuments<T>(databaseId, collectionId, queries);
+		return await database.listDocuments<T>(databaseId, collectionId, [
+			...queries,
+			Query.limit(limit),
+			Query.offset(offset)
+		]);
 	},
 	deleteDocument: async (databaseId: string, collectionId: string, documentId: string) => {
 		return await database.deleteDocument(databaseId, collectionId, documentId);
