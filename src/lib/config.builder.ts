@@ -1,4 +1,4 @@
-import { type ListInterface } from './config.interfaces';
+import type { ListInterface } from './config.interfaces';
 
 export class Config {
 	icon = '';

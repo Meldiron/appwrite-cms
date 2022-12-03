@@ -4,6 +4,44 @@ import { configStore } from '$lib/stores/config';
 import { error } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
+import { invalid, redirect } from '@sveltejs/kit';
+import type { Actions } from './$types';
+
+export const actions: Actions = {
+	deleteDocument: async ({ cookies, request }) => {
+		const apiKey = cookies.get('apiKey');
+
+		if (!apiKey) {
+			throw redirect(307, '/');
+		}
+
+		const config = get(configStore);
+
+		AppwriteService.setClient(config.endpoint, config.projectId, apiKey);
+
+		const data = await request.formData();
+
+		const databaseId = data.get('databaseId');
+		const collectionId = data.get('collectionId');
+		const documentId = data.get('documentId');
+
+		if (!databaseId || !collectionId || !documentId) {
+			return invalid(400, { msg: 'Invalid payload.' });
+		}
+
+		try {
+			await AppwriteService.deleteDocument(
+				databaseId.toString(),
+				collectionId.toString(),
+				documentId.toString()
+			);
+
+			return { success: true };
+		} catch (err: any) {
+			throw error(500, { message: 'Could not delete document: ' + err.message });
+		}
+	}
+};
 
 export const load: PageServerLoad = async ({ params, url }) => {
 	let group: Group | null = null;

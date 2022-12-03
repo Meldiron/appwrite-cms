@@ -1,11 +1,12 @@
 import { Client, Databases, Query, type Models } from 'node-appwrite';
 
 let client = new Client();
-const database = new Databases(client);
+let database = new Databases(client);
 
 export const AppwriteService = {
 	setClient: (endpoint: string, projectId: string, apiKey: string) => {
-		client.setEndpoint(endpoint).setProject(projectId).setKey(apiKey);
+		client = new Client().setEndpoint(endpoint).setProject(projectId).setKey(apiKey);
+		database = new Databases(client);
 	},
 	listDocuments: async <T extends Models.Document>(
 		databaseId: string,
@@ -18,5 +19,8 @@ export const AppwriteService = {
 		queries.push(Query.offset(offset));
 
 		return await database.listDocuments<T>(databaseId, collectionId, queries);
+	},
+	deleteDocument: async (databaseId: string, collectionId: string, documentId: string) => {
+		return await database.deleteDocument(databaseId, collectionId, documentId);
 	}
 };
