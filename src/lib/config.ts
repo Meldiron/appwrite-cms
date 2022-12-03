@@ -1,68 +1,44 @@
 import {
+	createBlock,
 	createConfig,
 	createDashboard,
 	createGroup,
-	createLabel,
 	createPanel
 } from './config.builder';
+import { ViewPlaintext } from './config.interfaces';
 
 export default createConfig()
-	.setEndpoint('https://cloud.appwrite.io/v1')
-	.setProjectId('6382433737a5f2062e09')
+	.setEndpoint('https://appwrite.raneurope.eu/v1')
+	.setProjectId('638a59bd6c71bc4cf787')
 	.setName('Almost Blog')
 	.setIcon('✏️')
 	.setDashboard(createDashboard().setMotd('Welcome to the CMS 👋'))
 	.addGroup(
 		createGroup()
-			.setName('Marketing')
-			.setIcon('📖')
+			.setName('Default')
+			.setIcon('🧱')
 			.setOpened(true)
 			.addPanel(
 				createPanel()
-					.setName('News')
-					.setSlug('news')
-					.setDescription('Weekly news.')
-					.setSubtitle('Public')
-					.setIcon('📰')
-					.setCollectionId('news') // TODO: Use
-					.setEditEnabled(true)
-					.setCreateEnabled(true)
-					.setDeleteEnabled(true)
-					.addLabel(
-						createLabel()
-							.setName('Only Drafts')
-							.setSlug('only-drafts')
-							.setIcon('🗞️')
-							.setQueries(['equals("status", "draft")'])
+					.setName('Articles')
+					.setSlug('articles')
+					.setDatabaseId('638a5b81243ac70c90e7')
+					.setCollectionId('638a5b91a39e545d9cf5')
+					.addBlock(
+						createBlock()
+							.setAttribute('author')
+							.setViewInterface(ViewPlaintext.create().setWidth('150px').setName('Autor'))
 					)
-					.addLabel(
-						createLabel()
-							.setName('All Drafts')
-							.setSlug('all-drafts')
-							.setIcon('🗞️')
-							.setQueries(['equals("status", "draft")'])
+					.addBlock(
+						createBlock()
+							.setAttribute('title')
+							.setViewInterface(ViewPlaintext.create().setName('Nadpis'))
 					)
 			)
-			.addPanel(
-				createPanel()
-					.setName('Settings')
-					.setSlug('settings')
-					.setDescription('')
-					.setSubtitle('')
-					.setIcon('⚙️')
-					.setCollectionId('settings')
-					.setSingletonId('default') // TODO: Use
-					.setEditEnabled(true)
-			)
-	)
-	.addGroup(createGroup().setName('Settings').setIcon('⚙️').setOpened(false));
-
+	);
 /*	
+// TODO: setSingletonId in settings
 // TODO: Finish
-panel
-	.addBlock(
-		createBlock()
-			.setAttribute('status')
 			.setListInterface(Plain().create())
 			.setEditInterface(
 				Select()

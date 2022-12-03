@@ -69,7 +69,7 @@
 											{#each group.panels as panel (group.name + panel.slug)}
 												<a
 													href={`/app/panels/${panel.slug}`}
-													class="text-white flex items-center justify-start space-x-3"
+													class="group text-white flex items-center justify-start space-x-3"
 												>
 													<div class="flex items-center justify-start space-x-2">
 														<span class="text-sm">{panel.icon}</span>

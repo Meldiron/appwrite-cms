@@ -1,5 +1,7 @@
+import { ViewPlaintext, type ViewInterface } from './config.interfaces';
+
 export class Config {
-	icon = '🚧';
+	icon = '';
 	name = 'Unkonown';
 	projectId = 'unknown';
 	endpoint = 'https://cloud.appwrite.io/v1';
@@ -39,7 +41,7 @@ export class Config {
 
 export class Group {
 	opened = false;
-	icon = '🚧';
+	icon = '';
 	name = 'Unknown';
 	panels: Panel[] = [];
 
@@ -65,12 +67,14 @@ export class Group {
 }
 
 export class Panel {
-	icon = '🚧';
+	icon = '';
 	name = 'Unknown';
 	slug = 'unknown';
-	description = 'Panel with no description.';
-	subtitle = 'No Subtitle';
+	description = '';
+	subtitle = '';
 	labels: Label[] = [];
+	blocks: Block[] = [];
+	databaseId: string = 'unknown';
 	collectionId: string = 'unknown';
 	singletonId: string = '';
 	deleteEnabled = true;
@@ -107,6 +111,11 @@ export class Panel {
 		return this;
 	}
 
+	addBlock(block: Block) {
+		this.blocks.push(block);
+		return this;
+	}
+
 	setDeleteEnabled(deleteEnabled: boolean) {
 		this.deleteEnabled = deleteEnabled;
 		return this;
@@ -124,6 +133,11 @@ export class Panel {
 
 	setCollectionId(collectionId: string) {
 		this.collectionId = collectionId;
+		return this;
+	}
+
+	setDatabaseId(databaseId: string) {
+		this.databaseId = databaseId;
 		return this;
 	}
 
@@ -171,6 +185,21 @@ export class Dashboard {
 	}
 }
 
+export class Block {
+	attribute = 'unknown';
+	viewInterface: ViewInterface | null = null;
+
+	setAttribute(attribute: string) {
+		this.attribute = attribute;
+		return this;
+	}
+
+	setViewInterface(viewInterface: ViewInterface) {
+		this.viewInterface = viewInterface;
+		return this;
+	}
+}
+
 export function createConfig() {
 	return new Config();
 }
@@ -189,4 +218,8 @@ export function createPanel() {
 
 export function createLabel() {
 	return new Label();
+}
+
+export function createBlock() {
+	return new Block();
 }
