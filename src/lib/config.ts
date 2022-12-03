@@ -5,7 +5,7 @@ import {
 	createGroup,
 	createPanel
 } from './config.builder';
-import { ViewPlaintext } from './config.interfaces';
+import { ListPlaintext } from './config.interfaces';
 
 export default createConfig()
 	.setEndpoint('https://appwrite.raneurope.eu/v1')
@@ -27,25 +27,16 @@ export default createConfig()
 					.addBlock(
 						createBlock()
 							.setAttribute('author')
-							.setViewInterface(ViewPlaintext.create().setWidth('150px').setName('Autor'))
+							.setListInterface(ListPlaintext.create().setWidth('150px').setName('Autor'))
 					)
 					.addBlock(
 						createBlock()
 							.setAttribute('title')
-							.setViewInterface(ViewPlaintext.create().setName('Nadpis'))
+							.setListInterface(ListPlaintext.create().setName('Nadpis'))
 					)
 			)
 	);
 /*	
-// TODO: setSingletonId in settings
-// TODO: Finish
-			.setListInterface(Plain().create())
-			.setEditInterface(
-				Select()
-					.create()
-					.addOption('published', 'Published')
-					.addOption('draft', 'Draft (not published)')
-			)
-			.setViewInterface(Icon().create().addIcon('published', '💚').addIcon('draft', '🧡'))
-	)
+// TODO: setSingletonId (used in settings)
+// TODO: setEditInterface, setViewInterface
 */

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Block, Group, Panel } from '$lib/config.builder';
-	import type { ViewPlaintext } from '$lib/config.interfaces';
+	import type { ListPlaintext } from '$lib/config.interfaces';
 	import type { Models } from 'node-appwrite';
 
-	export let config: ViewPlaintext;
+	export let config: ListPlaintext;
 	export let document: any & Models.Document;
 	export let value: any;
 	export let panel: Panel;

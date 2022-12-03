@@ -1,4 +1,4 @@
-import { ViewPlaintext, type ViewInterface } from './config.interfaces';
+import { type ListInterface } from './config.interfaces';
 
 export class Config {
 	icon = '';
@@ -187,15 +187,15 @@ export class Dashboard {
 
 export class Block {
 	attribute = 'unknown';
-	viewInterface: ViewInterface | null = null;
+	listInterface: ListInterface | null = null;
 
 	setAttribute(attribute: string) {
 		this.attribute = attribute;
 		return this;
 	}
 
-	setViewInterface(viewInterface: ViewInterface) {
-		this.viewInterface = viewInterface;
+	setListInterface(listInterface: ListInterface) {
+		this.listInterface = listInterface;
 		return this;
 	}
 }

@@ -7,7 +7,6 @@ export const AppwriteService = {
 	setClient: (endpoint: string, projectId: string, apiKey: string) => {
 		client.setEndpoint(endpoint).setProject(projectId).setKey(apiKey);
 	},
-	// TODO: Support queries
 	listDocuments: async <T extends Models.Document>(
 		databaseId: string,
 		collectionId: string,

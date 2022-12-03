@@ -1,6 +1,6 @@
-import Plaintext from '$lib/components/blocks/view/plaintext.svelte';
+import Plaintext from '$lib/components/blocks/list/plaintext.svelte';
 
-export abstract class ViewInterface {
+export abstract class ListInterface {
 	name = 'Unknown';
 	width = 'auto';
 	element: any; // TODO: Use svelte type
@@ -16,9 +16,9 @@ export abstract class ViewInterface {
 	}
 }
 
-export class ViewPlaintext extends ViewInterface {
+export class ListPlaintext extends ListInterface {
 	static create() {
-		return new ViewPlaintext();
+		return new ListPlaintext();
 	}
 
 	constructor() {

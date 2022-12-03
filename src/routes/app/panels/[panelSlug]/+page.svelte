@@ -181,12 +181,12 @@
 						</td>
 
 						{#each panel.blocks as block}
-							{#if block.viewInterface}
+							{#if block.listInterface}
 								<td
-									style={`width: ${block.viewInterface.width}`}
+									style={`width: ${block.listInterface.width}`}
 									class="px-4 py-2 font-semibold text-white border-r-2  border-slate-800 bg-slate-900"
 								>
-									{block.viewInterface.name}
+									{block.listInterface.name}
 								</td>
 							{/if}
 						{/each}
@@ -253,13 +253,13 @@
 							</td>
 
 							{#each panel.blocks as block}
-								{#if block.viewInterface}
+								{#if block.listInterface}
 									{@const value = document[block.attribute]}
 
 									<td class="px-4 py-4">
 										<svelte:component
-											this={block.viewInterface.element}
-											config={block.viewInterface}
+											this={block.listInterface.element}
+											config={block.listInterface}
 											{panel}
 											{group}
 											{block}
