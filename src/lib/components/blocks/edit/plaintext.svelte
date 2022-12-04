@@ -12,7 +12,6 @@
 
 	let inputValue = value;
 	function onInput(e: any) {
-		// TODO: Type properly
 		inputValue = e.target.value;
 	}
 </script>

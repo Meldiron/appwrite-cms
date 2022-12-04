@@ -84,7 +84,17 @@ export default createConfig()
 							.setEditInterface(new EditBoolean().setName('Is Confirmed'))
 					)
 			)
+			.addPanel(
+				createPanel()
+					.setIcon('⚙️')
+					.setName('Settings')
+					.setDatabaseId('default')
+					.setCollectionId('settings')
+					.setSingletonId('default')
+					.setSlug('settings')
+					.addBlock(createBlock().setAttribute('footerText'))
+					.addBlock(createBlock().setAttribute('pageDescription'))
+					.addBlock(createBlock().setAttribute('name'))
+					.addBlock(createBlock().setAttribute('pageTitle'))
+			)
 	);
-/*	
-// TODO: setSingletonId (used in settings)
-*/

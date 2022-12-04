@@ -27,27 +27,30 @@
 	icon="👀"
 >
 	<div class="flex items-center justify-end space-x-4">
-		<a href={`/app/panels/${panel.slug}`} class="flex items-center justify-center group">
-			<div class="p-3 text-sm  text-slate-800 rounded-l-md group-hover:bg-slate-200 bg-slate-100">
-				Close
-			</div>
-			<div class="p-3  text-slate-800 rounded-r-md group-hover:bg-slate-300 bg-slate-200">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="w-5 h-5"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M6 18L18 6M6 6l12 12"
-					/>
-				</svg>
-			</div>
-		</a>
+		{#if !panel.singletonId}
+			<a href={`/app/panels/${panel.slug}`} class="flex items-center justify-center group">
+				<div class="p-3 text-sm  text-slate-800 rounded-l-md group-hover:bg-slate-200 bg-slate-100">
+					Close
+				</div>
+				<div class="p-3  text-slate-800 rounded-r-md group-hover:bg-slate-300 bg-slate-200">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="w-5 h-5"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M6 18L18 6M6 6l12 12"
+						/>
+					</svg>
+				</div>
+			</a>
+		{/if}
+
 		{#if panel.editEnabled}
 			<a
 				href={`/app/panels/${panel.slug}/edit/${data.panelDocument.$id}`}

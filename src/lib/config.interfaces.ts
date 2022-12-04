@@ -8,7 +8,7 @@ import EditBooleanEl from '$lib/components/blocks/edit/boolean.svelte';
 export abstract class ListInterface {
 	name = 'Unknown';
 	width = 'auto';
-	element: any; // TODO: Use svelte type
+	element: any;
 
 	setName(name: string) {
 		this.name = name;
@@ -23,7 +23,7 @@ export abstract class ListInterface {
 
 export abstract class ViewInterface {
 	name = 'Unknown';
-	element: any; // TODO: Use svelte type
+	element: any;
 
 	setName(name: string) {
 		this.name = name;
@@ -33,7 +33,7 @@ export abstract class ViewInterface {
 
 export abstract class EditInterface {
 	name = 'Unknown';
-	element: any; // TODO: Use svelte type
+	element: any;
 
 	setName(name: string) {
 		this.name = name;

@@ -1,9 +1,7 @@
 import { AppwriteService } from '$lib/appwrite.server';
-import { configStore } from '$lib/stores/config';
 import { error } from '@sveltejs/kit';
-import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
-import { invalid, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { PageUtils } from '$lib/utils';
 
@@ -39,6 +37,10 @@ export const load: PageServerLoad = async ({ locals, params, url }) => {
 	PageUtils.parseAuth(locals);
 
 	const { panel, group } = PageUtils.parseParams(params);
+
+	if (panel.singletonId) {
+		throw redirect(307, `/app/panels/${panel.slug}/view/${panel.singletonId}`);
+	}
 
 	try {
 		const limit = +(url.searchParams.get('limit') ?? '10');
