@@ -4,7 +4,7 @@
 
 > Appwrite CMS currently supports Appwrite 1.x version.
 
-> Appwrite CMS is not created, maintained, or affiliated with Appwrite. All trademarks, logos and brand names are the property of their respective owners.
+> Appwrite CMS is not created or maintained by Appwrite, nor affiliated with itp. All trademarks, logos and brand names are the property of their respective owners.
 
 ## 👋 Introduction
 
