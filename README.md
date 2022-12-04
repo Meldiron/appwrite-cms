@@ -12,7 +12,7 @@ Hey there 👋
 
 Happy to see you here... Since you are looking for Appwrite admin panel, you already know what Appwrite is, right... Right?!?!
 
-If you never heard about Appwrite, please check out their [Website](https://appwrite.io/) to learn more about rapidly growing backend as a service. Believe it or not, you can't use Appwrite CMS without Appwrite 😬
+If you never heard about Appwrite, please check out [Appwrite website](https://appwrite.io/) to learn more about rapidly growing backend as a service. Believe it or not, you can't use Appwrite CMS without Appwrite 😬
 
 With that said...
 
@@ -33,10 +33,11 @@ Thanks for your attention open source community! See you later in GitHub issues 
    - `SECRET_SESSION_SECRET` should be random string, at least 32 chars long. Used to encrypt sessions
    - `SECRET_AUTH_USERS` should be comma-separated list of users. Each user includes login credentials and Appwrite API key they should be using. **API Key** must have `documents.read` and `documents.write` scopes (from `databases` category)
 3. Edit whole file `src/lib/config.ts`. Feel free to keep backup of original content, that is an example configuration for a [Almost Blog](https://github.com/TringuG/almost-blog). To learn more about this config file, read documentation below.
-   - API key used
-4.
+4. You are all set and ready to use Appwrite CMS ✨
 
 ## 📚 Documentation
+
+> Work in progress ...
 
 ## 💖 Contributing
 
