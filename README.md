@@ -1,4 +1,48 @@
-# create-svelte
+![Cover image](/static/cover.png)
+
+# Appwrite CMS
+
+> Appwrite CMS currently supports Appwrite 1.x version.
+
+> Appwrite CMS is not created, maintained, or affiliated with Appwrite. All trademarks, logos and brand names are the property of their respective owners.
+
+## 👋 Introduction
+
+Hey there 👋
+
+Happy to see you here... Since you are looking for Appwrite admin panel, you already know what Appwrite is, right... Right?!?!
+
+If you never heard about Appwrite, please check out their [Website](https://appwrite.io/) to learn more about rapidly growing backend as a service. Believe it or not, you can't use Appwrite CMS without Appwrite 😬
+
+With that said...
+
+Prepare admin panels for your projects rapidly using Appwrite CMS, a headless CMS for your Appwrite project! ✨
+
+Appwrite CMS is headless CMS for your Appwrite database. Appwrite allows you to manage your database and files, but the UI is too developer-ish and allows zero customization. In the end, it is a tool for developer not copywriter, so noone ever expected to use Appwrite as CMS.
+
+**That's where Appwrite CMS comes into play!** Connect Appwrite CMS to your Appwrite project and configure it as much as you need. Appwrite CMS also allows you to write your own components to achieve any interface your project needs.
+
+Thanks for your attention open source community! See you later in GitHub issues section 👋 😄
+
+## 🧑‍🎓 How to Use?
+
+> Before using, make sure you have Appwrite server running and you have a project.
+
+1. Fork Appwrite CMS
+2. Copy `.env.example` to `.env` (or setup environment variables on your hosting provider)
+   - `SECRET_SESSION_SECRET` should be random string, at least 32 chars long. Used to encrypt sessions
+   - `SECRET_AUTH_USERS` should be comma-separated list of users. Each user includes login credentials and Appwrite API key they should be using. **API Key** must have `documents.read` and `documents.write` scopes (from `databases` category)
+3. Edit whole file `src/lib/config.ts`. Feel free to keep backup of original content, that is an example configuration for a [Almost Blog](https://github.com/TringuG/almost-blog). To learn more about this config file, read documentation below.
+   - API key used
+4.
+
+## 📚 Documentation
+
+## 💖 Contributing
+
+Learn more in the [CONTRIBUTING.md](CONTRIBUTING.md) file. All written from scratch, no copy&paste, I promise! 😅
+
+## 🤖 Generated Svelte Kit Docs
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 

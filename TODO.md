@@ -8,9 +8,9 @@ Features I have in mind and would like to implement before releasing Appwrite CM
 - Sort by attribute functionality
 - Multiselect delete in list
 - Array in list, somehow
-- Object in list, somehow
+- Relations in list, somehow
 - Relationship components
-- Dashboard components (graphs, ...)
+- Better dashboard
 - Dark theme
 - Responsibity
 - Write docs
