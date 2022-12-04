@@ -7,11 +7,17 @@ import {
 	createLabel,
 	createPanel
 } from './config.builder';
-import { ListPlaintext } from './config.interfaces';
+import {
+	EditBoolean,
+	EditPlaintext,
+	ListBoolean,
+	ListPlaintext,
+	ViewBoolean
+} from './config.interfaces';
 
 export default createConfig()
 	.setEndpoint('https://appwrite.raneurope.eu/v1')
-	.setProjectId('638a59bd6c71bc4cf787')
+	.setProjectId('appwriteCms')
 	.setName('Almost Blog')
 	.setIcon('✏️')
 	.setDashboard(createDashboard().setMotd('Welcome to the CMS 👋'))
@@ -24,8 +30,8 @@ export default createConfig()
 				createPanel()
 					.setName('Articles')
 					.setSlug('articles')
-					.setDatabaseId('638a5b81243ac70c90e7')
-					.setCollectionId('638a5b91a39e545d9cf5')
+					.setDatabaseId('default')
+					.setCollectionId('articles')
 					.addDefaultLabel()
 					.addLabel(
 						createLabel()
@@ -44,16 +50,37 @@ export default createConfig()
 					.addBlock(
 						createBlock()
 							.setAttribute('author')
-							.setListInterface(ListPlaintext.create().setWidth('150px').setName('Autor'))
+							.setListInterface(new ListPlaintext().setWidth('150px').setName('Autor'))
 					)
 					.addBlock(
 						createBlock()
 							.setAttribute('title')
-							.setListInterface(ListPlaintext.create().setName('Nadpis'))
+							.setListInterface(new ListPlaintext().setName('Nadpis'))
+					)
+			)
+			.addPanel(
+				createPanel()
+					.setName('Newsletters')
+					.setSlug('newsletters')
+					.setDatabaseId('default')
+					.setCollectionId('newsletters')
+					.setIdAttribute('email')
+					.addBlock(
+						createBlock()
+							.setAttribute('email')
+							.setEditInterface(
+								new EditPlaintext().setName('E-mail').setPlaceholder('Subscriber e-mail')
+							)
+					)
+					.addBlock(
+						createBlock()
+							.setAttribute('confirmed')
+							.setViewInterface(new ViewBoolean().setName('Is Confirmed'))
+							.setListInterface(new ListBoolean().setWidth('150px').setName('Confirmed?'))
+							.setEditInterface(new EditBoolean().setName('Is Confirmed'))
 					)
 			)
 	);
 /*	
 // TODO: setSingletonId (used in settings)
-// TODO: setEditInterface, setViewInterface
 */

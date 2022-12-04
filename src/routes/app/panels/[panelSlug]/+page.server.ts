@@ -1,11 +1,11 @@
 import { AppwriteService } from '$lib/appwrite.server';
-import type { Group, Panel } from '$lib/config.builder';
 import { configStore } from '$lib/stores/config';
 import { error } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
 import { invalid, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { PageUtils } from '$lib/utils';
 
 export const actions: Actions = {
 	deleteDocument: async ({ cookies, request }) => {
@@ -44,21 +44,7 @@ export const actions: Actions = {
 };
 
 export const load: PageServerLoad = async ({ params, url }) => {
-	let group: Group | null = null;
-	let panel: Panel | null = null;
-
-	for (const xgroup of get(configStore).groups) {
-		for (const xpanel of xgroup.panels) {
-			if (xpanel.slug === params.panelSlug) {
-				group = xgroup;
-				panel = xpanel;
-			}
-		}
-	}
-
-	if (!group || !panel) {
-		throw error(404, { message: 'Panel not found.' });
-	}
+	const { panel, group } = PageUtils.parseParams(params);
 
 	try {
 		const limit = +(url.searchParams.get('limit') ?? '10');
@@ -76,11 +62,14 @@ export const load: PageServerLoad = async ({ params, url }) => {
 		);
 
 		return {
-			panelSlug: params.panelSlug,
 			panelDocuments: documents,
 			panelLabel: label,
 			panelLimit: limit,
-			panelPage: page
+			panelPage: page,
+
+			panelSlug: params.panelSlug,
+			group,
+			panel
 		};
 	} catch (err: any) {
 		throw error(500, { message: 'Could not load documents: ' + err.message });

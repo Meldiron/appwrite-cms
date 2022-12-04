@@ -92,7 +92,7 @@
 		<form action="/app?/logout" method="POST" class="p-3">
 			<button
 				type="submit"
-				class="flex items-center justify-center w-full p-3 space-x-3 text-center text-red-500 border-2 rounded-lg  border-slate-900 hover:bg-black bg-slate-900"
+				class="flex items-center justify-center w-full p-3 space-x-3 text-center text-red-500 hover:text-red-400"
 			>
 				<span> Logout </span>
 			</button>

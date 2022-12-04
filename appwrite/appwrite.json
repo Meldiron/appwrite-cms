@@ -1,0 +1,348 @@
+{
+    "projectId": "appwriteCms",
+    "projectName": "Appwrite CMS",
+    "collections": [
+        {
+            "$id": "articles",
+            "$createdAt": "2022-12-04T09:18:08.637+00:00",
+            "$updatedAt": "2022-12-04T09:18:08.637+00:00",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "Articles",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "title",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "content",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 100000,
+                    "default": null
+                },
+                {
+                    "key": "author",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "status",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": "draft"
+                },
+                {
+                    "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "status",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "status"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "links",
+            "$createdAt": "2022-12-04T09:18:11.121+00:00",
+            "$updatedAt": "2022-12-04T09:18:11.121+00:00",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "Links",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "slug",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "articleId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "newsletters",
+            "$createdAt": "2022-12-04T09:18:13.420+00:00",
+            "$updatedAt": "2022-12-04T09:18:13.420+00:00",
+            "$permissions": [
+                "create(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "Newsletters",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "confirmed",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "unique",
+                    "type": "unique",
+                    "status": "available",
+                    "attributes": [
+                        "email"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "settings",
+            "$createdAt": "2022-12-04T09:18:16.146+00:00",
+            "$updatedAt": "2022-12-04T09:18:16.146+00:00",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "Settings",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "footerText",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "pageDescription",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 1023,
+                    "default": null
+                },
+                {
+                    "key": "pageTitle",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "header",
+            "$createdAt": "2022-12-04T09:18:43.478+00:00",
+            "$updatedAt": "2022-12-04T09:18:43.478+00:00",
+            "$permissions": [],
+            "databaseId": "default",
+            "name": "Header",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "url",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 4095,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "categories",
+            "$createdAt": "2022-12-04T09:19:51.235+00:00",
+            "$updatedAt": "2022-12-04T09:20:21.518+00:00",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "Categories",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "description",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "slug",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "articlesCategories",
+            "$createdAt": "2022-12-04T09:21:13.169+00:00",
+            "$updatedAt": "2022-12-04T09:22:28.736+00:00",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "Articles - Categories",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "articleId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "categoryId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "articleId",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "articleId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "categoryId",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "categoryId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "unique",
+                    "type": "unique",
+                    "status": "available",
+                    "attributes": [
+                        "articleId",
+                        "categoryId"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                }
+            ]
+        }
+    ]
+}

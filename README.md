@@ -1,49 +1,5 @@
 ## Snippet
 
-    {#if type === 'list'}
-
-    {:else if type === 'create'}
-    	<div class="flex items-center justify-end space-x-4">
-    		<a href="#" class="flex items-center justify-center group">
-    			<div class="p-3 text-sm  text-slate-800 rounded-l-md group-hover:bg-slate-200 bg-slate-100">
-    				Discard
-    			</div>
-    			<div class="p-3  text-slate-800 rounded-r-md group-hover:bg-slate-300 bg-slate-200">
-    				<svg
-    					xmlns="http://www.w3.org/2000/svg"
-    					class="w-5 h-5"
-    					viewBox="0 0 20 20"
-    					fill="currentColor"
-    				>
-    					<path
-    						fill-rule="evenodd"
-    						d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-    						clip-rule="evenodd"
-    					/>
-    				</svg>
-    			</div>
-    		</a>
-
-    		<button type="button" class="flex items-center justify-center group">
-    			<div class="p-3 text-sm text-white  group-hover:bg-slate-900 rounded-l-md bg-slate-800">
-    				Save
-    			</div>
-    			<div class="p-3 text-white  group-hover:bg-black rounded-r-md bg-slate-900">
-    				<svg
-    					xmlns="http://www.w3.org/2000/svg"
-    					class="w-5 h-5"
-    					viewBox="0 0 20 20"
-    					fill="currentColor"
-    				>
-    					<path
-    						d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"
-    					/>
-    					<path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z" />
-    					<path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z" />
-    				</svg>
-    			</div>
-    		</button>
-    	</div>
     {:else if type === 'edit'}
     	<div class="flex items-center justify-end space-x-4 group">
     		<a href="#" class="flex items-center justify-center">
@@ -86,49 +42,6 @@
     			</div>
     		</button>
     	</div>
-    {:else if type === 'view'}
-    	<div class="flex items-center justify-end space-x-4">
-    		<a href="#" class="flex items-center justify-center group">
-    			<div class="p-3 text-sm  text-slate-800 rounded-l-md group-hover:bg-slate-200 bg-slate-100">
-    				Close
-    			</div>
-    			<div class="p-3  text-slate-800 rounded-r-md group-hover:bg-slate-300 bg-slate-200">
-    				<svg
-    					xmlns="http://www.w3.org/2000/svg"
-    					class="w-5 h-5"
-    					fill="none"
-    					viewBox="0 0 24 24"
-    					stroke="currentColor"
-    				>
-    					<path
-    						stroke-linecap="round"
-    						stroke-linejoin="round"
-    						stroke-width="2"
-    						d="M6 18L18 6M6 6l12 12"
-    					/>
-    				</svg>
-    			</div>
-    		</a>
-
-    		<a href="#" class="flex items-center justify-center group">
-    			<div class="p-3 text-sm text-white  group-hover:bg-slate-900 rounded-l-md bg-slate-800">
-    				Edit
-    			</div>
-    			<div class="p-3 text-white  rounded-r-md group-hover:bg-black bg-slate-900">
-    				<svg
-    					xmlns="http://www.w3.org/2000/svg"
-    					class="w-5 h-5"
-    					viewBox="0 0 20 20"
-    					fill="currentColor"
-    				>
-    					<path
-    						d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-    					/>
-    				</svg>
-    			</div>
-    		</a>
-    	</div>
-    {/if}
 
 # create-svelte
 

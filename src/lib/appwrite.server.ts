@@ -23,5 +23,12 @@ export const AppwriteService = {
 	},
 	deleteDocument: async (databaseId: string, collectionId: string, documentId: string) => {
 		return await database.deleteDocument(databaseId, collectionId, documentId);
+	},
+	getDocument: async <T extends Models.Document>(
+		databaseId: string,
+		collectionId: string,
+		documentId: string
+	) => {
+		return await database.getDocument<T>(databaseId, collectionId, documentId);
 	}
 };

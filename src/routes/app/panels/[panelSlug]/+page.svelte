@@ -8,9 +8,6 @@
 
 	export let data: PageData;
 
-	let group: Group;
-	let panel: Panel;
-
 	function parseQuery(queryString: string) {
 		var query: any = {};
 		var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
@@ -42,6 +39,8 @@
 		return newQuery;
 	}
 
+	let group: Group;
+	let panel: Panel;
 	$: {
 		for (const xgroup of $configStore.groups) {
 			for (const xpanel of xgroup.panels) {
@@ -134,33 +133,36 @@
 </Navbar>
 
 <div class="p-4 text-base">
-	<div class="w-full text-md">
-		<div
-			class="
+	{#if panel.labels.length > 0}
+		<div class="w-full text-md">
+			<div class="flex flex-col space-y-2">
+				<p class="text-sm text-slate-500">Labels:</p>
+				<div
+					class="
 			flex
 			w-[fit-content]
 			overflow-x-auto
 			flex-nowrap
 			space-x-3
 		  "
-		>
-			{#each panel.labels as label (label.slug)}
-				<!-- TODO: Design if active -->
-				<!-- TODO: If label active, use queries -->
-				<a
-					href={getSearch(search, 'label', label.slug)}
-					class={`p-1 px-3 rounded-md ${
-						data.panelLabel === label.slug
-							? 'bg-slate-900 text-white'
-							: 'bg-slate-200 text-slate-900'
-					}`}
 				>
-					{label.icon}
-					{label.name}
-				</a>
-			{/each}
+					{#each panel.labels as label (label.slug)}
+						<a
+							href={getSearch(search, 'label', label.slug)}
+							class={`p-1 px-3 rounded-md ${
+								data.panelLabel === label.slug
+									? 'bg-slate-900 text-white'
+									: 'bg-slate-200 text-slate-900'
+							}`}
+						>
+							{label.icon}
+							{label.name}
+						</a>
+					{/each}
+				</div>
+			</div>
 		</div>
-	</div>
+	{/if}
 
 	<div>
 		<p class="mb-2 text-sm text-right text-slate-500 my-2">
@@ -168,8 +170,8 @@
 			{data.panelDocuments.total === 1 ? 'document' : 'documents'} found
 		</p>
 		{#if data.panelDocuments.documents.length <= 0}
-			<div class="bg-orange-100 border-2 border-orange-100 rounded-md p-6">
-				<p class="text-orange-600 text-center">There are no results.</p>
+			<div class="bg-slate-200 border-2 border-slate-200 rounded-md p-6">
+				<p class="text-slate-600 text-center">There are no results.</p>
 			</div>
 		{:else}
 			<div class="overflow-y-auto border-2 rounded-md  bg-slate-900 border-slate-900">
@@ -297,7 +299,7 @@
 
 	<div class="flex items-start justify-between mt-6">
 		<div class="flex flex-col space-y-2">
-			<p class="text-sm text-slate-500">Results per page</p>
+			<p class="text-sm text-slate-500">Results per page:</p>
 
 			<div class="flex space-x-1">
 				{#each [1, 10, 25, 50, 100] as limit}
@@ -311,8 +313,8 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col space-y-2">
-			<p class="text-sm text-slate-500 text-right">Pages</p>
+		<div class="flex flex-col space-y-2 items-end">
+			<p class="text-sm text-slate-500 text-right">Pages:</p>
 
 			<div class="flex space-x-1">
 				{#each pages as page}

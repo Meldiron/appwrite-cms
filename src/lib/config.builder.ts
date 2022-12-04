@@ -1,4 +1,11 @@
-import type { ListInterface } from './config.interfaces';
+import {
+	EditPlaintext,
+	EditInterface,
+	ListPlaintext,
+	ViewInterface,
+	ViewPlaintext,
+	type ListInterface
+} from './config.interfaces';
 
 export class Config {
 	icon = '';
@@ -77,6 +84,7 @@ export class Panel {
 	databaseId: string = 'unknown';
 	collectionId: string = 'unknown';
 	singletonId: string = '';
+	idAttribute: string = '$id';
 	deleteEnabled = true;
 	createEnabled = true;
 	editEnabled = true;
@@ -152,6 +160,11 @@ export class Panel {
 		this.setDeleteEnabled(false);
 		return this;
 	}
+
+	setIdAttribute(idAttribute: string) {
+		this.idAttribute = idAttribute;
+		return this;
+	}
 }
 
 export class Label {
@@ -192,15 +205,30 @@ export class Dashboard {
 
 export class Block {
 	attribute = 'unknown';
-	listInterface: ListInterface | null = null;
+	listInterface: ListInterface = new ListPlaintext();
+	viewInterface: ViewInterface = new ViewPlaintext();
+	editInterface: EditInterface = new EditPlaintext();
 
 	setAttribute(attribute: string) {
 		this.attribute = attribute;
+		this.listInterface.setName(attribute);
+		this.viewInterface.setName(attribute);
+		this.editInterface.setName(attribute);
 		return this;
 	}
 
 	setListInterface(listInterface: ListInterface) {
 		this.listInterface = listInterface;
+		return this;
+	}
+
+	setViewInterface(viewInterface: ViewInterface) {
+		this.viewInterface = viewInterface;
+		return this;
+	}
+
+	setEditInterface(editInterface: EditInterface) {
+		this.editInterface = editInterface;
 		return this;
 	}
 }
