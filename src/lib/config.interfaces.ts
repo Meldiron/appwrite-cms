@@ -83,9 +83,15 @@ export class EditPlaintext extends EditInterface {
 	}
 
 	placeholder = '';
+	type = 'text';
 
 	setPlaceholder(placeholder: string) {
 		this.placeholder = placeholder;
+		return this;
+	}
+
+	setType(type: string) {
+		this.type = type;
 		return this;
 	}
 }

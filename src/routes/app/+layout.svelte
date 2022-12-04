@@ -4,9 +4,7 @@
 </script>
 
 <div class="flex w-screen h-screen">
-	<div
-		class=" flex-shrink-0 w-[300px] h-full flex flex-col from-slate-900 via-slate-900 to-black bg-gradient-to-b"
-	>
+	<div class=" flex-shrink-0 w-[300px] h-full flex flex-col bg-slate-900">
 		<a
 			href="/app"
 			class="flex items-center w-full p-3 space-x-3 text-white shadow-md  group bg-slate-800"

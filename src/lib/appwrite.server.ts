@@ -1,4 +1,4 @@
-import { Client, Databases, Query, type Models } from 'node-appwrite';
+import { Client, Databases, ID, Query, type Models } from 'node-appwrite';
 
 let client = new Client();
 let database = new Databases(client);
@@ -29,6 +29,26 @@ export const AppwriteService = {
 		collectionId: string,
 		documentId: string
 	) => {
+		// TODO: Render permissions
 		return await database.getDocument<T>(databaseId, collectionId, documentId);
+	},
+	createDocument: async <T extends Models.Document>(
+		databaseId: string,
+		collectionId: string,
+		document: any
+	) => {
+		// TODO: Allow setting permissions
+		// TODO: Configurable ID
+		return await database.createDocument<T>(databaseId, collectionId, ID.unique(), document);
+	},
+	updateDocument: async <T extends Models.Document>(
+		databaseId: string,
+		collectionId: string,
+		documentId: string,
+		document: any
+	) => {
+		// TODO: Allow editing permissions
+		// TODO: Allow editing $id
+		return await database.updateDocument<T>(databaseId, collectionId, documentId, document);
 	}
 };

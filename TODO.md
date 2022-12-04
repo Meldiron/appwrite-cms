@@ -1,6 +1,6 @@
 # TODO
 
-Features I have in mind and would like to implement before releasing AppwriteCMS 1.0:
+Features I have in mind and would like to implement before releasing Appwrite CMS 1.0:
 
 - Searching
 - Sort by attribute functionality

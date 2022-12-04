@@ -11,4 +11,4 @@
 	export let block: Block;
 </script>
 
-<p>{value === true ? 'Yes' : 'No'}</p>
+<p>{value === true ? 'Yes' : value === false ? 'No' : 'None'}</p>

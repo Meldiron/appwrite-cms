@@ -9,15 +9,7 @@ import { PageUtils } from '$lib/utils';
 
 export const actions: Actions = {
 	deleteDocument: async ({ cookies, request }) => {
-		const apiKey = cookies.get('apiKey');
-
-		if (!apiKey) {
-			throw redirect(307, '/');
-		}
-
-		const config = get(configStore);
-
-		AppwriteService.setClient(config.endpoint, config.projectId, apiKey);
+		PageUtils.parseAuth(cookies);
 
 		const data = await request.formData();
 
@@ -26,7 +18,7 @@ export const actions: Actions = {
 		const documentId = data.get('documentId');
 
 		if (!databaseId || !collectionId || !documentId) {
-			return invalid(400, { msg: 'Invalid payload.' });
+			throw error(400, { message: 'Invalid payload.' });
 		}
 
 		try {
@@ -43,7 +35,9 @@ export const actions: Actions = {
 	}
 };
 
-export const load: PageServerLoad = async ({ params, url }) => {
+export const load: PageServerLoad = async ({ cookies, params, url }) => {
+	PageUtils.parseAuth(cookies);
+
 	const { panel, group } = PageUtils.parseParams(params);
 
 	try {

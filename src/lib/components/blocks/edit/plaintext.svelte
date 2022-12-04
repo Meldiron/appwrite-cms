@@ -9,10 +9,19 @@
 	export let panel: Panel;
 	export let group: Group;
 	export let block: Block;
+
+	let inputValue = value;
+	function onInput(e: any) {
+		// TODO: Type properly
+		inputValue = e.target.value;
+	}
 </script>
 
 <input
 	class="w-full p-3 bg-white border-2 rounded-md border-slate-200 focus:outline-none focus:ring ring-gray-600"
-	type="text"
+	type={config.type}
+	name={block.attribute}
+	value={inputValue}
+	on:input={onInput}
 	placeholder={config.placeholder}
 />

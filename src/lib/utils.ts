@@ -1,9 +1,21 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { get } from 'svelte/store';
+import { AppwriteService } from './appwrite.server';
 import type { Group, Panel } from './config.builder';
 import { configStore } from './stores/config';
 
 export const PageUtils = {
+	parseAuth: (cookies: any) => {
+		const apiKey = cookies.get('apiKey');
+
+		if (!apiKey) {
+			throw redirect(307, '/');
+		}
+
+		const config = get(configStore);
+
+		AppwriteService.setClient(config.endpoint, config.projectId, apiKey);
+	},
 	parseParams: (params: any) => {
 		let group: Group | null = null;
 		let panel: Panel | null = null;
@@ -21,8 +33,8 @@ export const PageUtils = {
 			throw error(404, { message: 'Panel not found.' });
 		}
 
-		const groupCopy = JSON.parse(JSON.stringify(group));
-		const panelCopy = JSON.parse(JSON.stringify(panel));
+		const groupCopy: Group = JSON.parse(JSON.stringify(group));
+		const panelCopy: Panel = JSON.parse(JSON.stringify(panel));
 
 		groupCopy.panels = [];
 		panelCopy.blocks = [];
