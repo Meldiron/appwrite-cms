@@ -5,8 +5,8 @@ import { error, redirect } from '@sveltejs/kit';
 import { AppwriteService } from '$lib/appwrite.server';
 
 export const actions: Actions = {
-	default: async ({ params, cookies, request }) => {
-		PageUtils.parseAuth(cookies);
+	default: async ({ params, locals, request }) => {
+		PageUtils.parseAuth(locals);
 
 		const { panel } = PageUtils.parseParams(params);
 

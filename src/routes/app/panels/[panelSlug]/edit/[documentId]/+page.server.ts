@@ -6,8 +6,8 @@ import type { Models } from 'node-appwrite';
 import { AppwriteService } from '$lib/appwrite.server';
 
 export const actions: Actions = {
-	default: async ({ params, cookies, request }) => {
-		PageUtils.parseAuth(cookies);
+	default: async ({ params, locals, request }) => {
+		PageUtils.parseAuth(locals);
 
 		const { panel } = PageUtils.parseParams(params);
 		const documentId = params.documentId;
@@ -51,8 +51,8 @@ export const actions: Actions = {
 	}
 };
 
-export const load: PageServerLoad = async ({ cookies, params }) => {
-	PageUtils.parseAuth(cookies);
+export const load: PageServerLoad = async ({ locals, params }) => {
+	PageUtils.parseAuth(locals);
 	const { panel, group } = PageUtils.parseParams(params);
 
 	const id = params.documentId;

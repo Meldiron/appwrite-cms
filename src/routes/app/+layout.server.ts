@@ -5,7 +5,7 @@ import { redirect } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ cookies }) => {
-	PageUtils.parseAuth(cookies);
+export const load: PageServerLoad = async ({ locals }) => {
+	PageUtils.parseAuth(locals);
 	return {};
 };

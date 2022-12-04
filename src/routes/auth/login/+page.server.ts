@@ -3,7 +3,7 @@ import { invalid, redirect } from '@sveltejs/kit';
 import { SECRET_AUTH_USERS } from '$env/static/private';
 
 export const actions: Actions = {
-	default: async ({ cookies, request }) => {
+	default: async ({ locals, request }) => {
 		const data = await request.formData();
 
 		const inputNickname = data.get('nickname');
@@ -20,10 +20,8 @@ export const actions: Actions = {
 			const [nickname, password] = auth.split(':');
 
 			if (nickname === inputNickname && password === inputPassword) {
-				cookies.set('apiKey', key, {
-					path: '/',
-					sameSite: true,
-					secure: true
+				await locals.session.set({
+					apiKey: key
 				});
 
 				throw redirect(303, '/');

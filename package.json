@@ -34,6 +34,7 @@
 	"type": "module",
 	"dependencies": {
 		"@tailwindcss/typography": "^0.5.8",
-		"node-appwrite": "^8.1.0"
+		"node-appwrite": "^8.1.0",
+		"svelte-kit-cookie-session": "^3.2.2"
 	}
 }

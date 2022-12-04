@@ -5,8 +5,8 @@ import type { Group, Panel } from './config.builder';
 import { configStore } from './stores/config';
 
 export const PageUtils = {
-	parseAuth: (cookies: any) => {
-		const apiKey = cookies.get('apiKey');
+	parseAuth: (locals: any) => {
+		const apiKey = locals.session.data.apiKey;
 
 		if (!apiKey) {
 			throw redirect(307, '/');

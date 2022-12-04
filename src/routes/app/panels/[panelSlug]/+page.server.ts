@@ -8,8 +8,8 @@ import type { Actions } from './$types';
 import { PageUtils } from '$lib/utils';
 
 export const actions: Actions = {
-	deleteDocument: async ({ cookies, request }) => {
-		PageUtils.parseAuth(cookies);
+	deleteDocument: async ({ locals, request }) => {
+		PageUtils.parseAuth(locals);
 
 		const data = await request.formData();
 
@@ -35,8 +35,8 @@ export const actions: Actions = {
 	}
 };
 
-export const load: PageServerLoad = async ({ cookies, params, url }) => {
-	PageUtils.parseAuth(cookies);
+export const load: PageServerLoad = async ({ locals, params, url }) => {
+	PageUtils.parseAuth(locals);
 
 	const { panel, group } = PageUtils.parseParams(params);
 

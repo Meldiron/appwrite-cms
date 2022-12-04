@@ -4,8 +4,8 @@ import { error } from '@sveltejs/kit';
 import type { Models } from 'node-appwrite';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ cookies, params }) => {
-	PageUtils.parseAuth(cookies);
+export const load: PageServerLoad = async ({ locals, params }) => {
+	PageUtils.parseAuth(locals);
 	const { panel, group } = PageUtils.parseParams(params);
 
 	const id = params.documentId;
