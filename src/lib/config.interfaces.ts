@@ -2,8 +2,10 @@ import ListPlaintextEl from '$lib/components/blocks/list/plaintext.svelte';
 import ListBooleanEl from '$lib/components/blocks/list/boolean.svelte';
 import ViewPlaintextEl from '$lib/components/blocks/view/plaintext.svelte';
 import ViewBooleanEl from '$lib/components/blocks/view/boolean.svelte';
+import ViewFileEl from '$lib/components/blocks/view/file.svelte';
 import EditPlaintextEl from '$lib/components/blocks/edit/plaintext.svelte';
 import EditBooleanEl from '$lib/components/blocks/edit/boolean.svelte';
+import EditFileEl from '$lib/components/blocks/edit/file.svelte';
 
 export abstract class ListInterface {
 	name = 'Unknown';
@@ -46,13 +48,6 @@ export class ListPlaintext extends ListInterface {
 		super();
 		this.element = ListPlaintextEl;
 	}
-
-	color = '#000000';
-
-	setColor(color: string) {
-		this.color = color;
-		return this;
-	}
 }
 
 export class ListBoolean extends ListInterface {
@@ -73,6 +68,13 @@ export class ViewBoolean extends ViewInterface {
 	constructor() {
 		super();
 		this.element = ViewBooleanEl;
+	}
+}
+
+export class ViewFile extends ViewInterface {
+	constructor(public bucketId: string) {
+		super();
+		this.element = ViewFileEl;
 	}
 }
 
@@ -100,5 +102,12 @@ export class EditBoolean extends EditInterface {
 	constructor() {
 		super();
 		this.element = EditBooleanEl;
+	}
+}
+
+export class EditFile extends EditInterface {
+	constructor(public bucketId: string) {
+		super();
+		this.element = EditFileEl;
 	}
 }

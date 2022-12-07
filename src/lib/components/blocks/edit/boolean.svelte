@@ -9,6 +9,7 @@
 	export let panel: Panel;
 	export let group: Group;
 	export let block: Block;
+	export let ready = true;
 
 	$: formValue = value === true ? 'xtrue' : value === false ? 'xfalse' : 'xempty';
 </script>

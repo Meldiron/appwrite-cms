@@ -8,12 +8,12 @@ import {
 } from './config.interfaces';
 
 export class Config {
-	icon = '';
-	name = 'Unkonown';
-	projectId = 'unknown';
-	endpoint = 'https://cloud.appwrite.io/v1';
+	icon = '💫';
+	name = 'Unnamed CMS';
 	groups: Group[] = [];
 	dashboard: Dashboard = new Dashboard();
+
+	constructor(public endpoint: string, public projectId: string) {}
 
 	setIcon(icon: string) {
 		this.icon = icon;
@@ -49,7 +49,7 @@ export class Config {
 export class Group {
 	opened = false;
 	icon = '';
-	name = 'Unknown';
+	name = 'Unnamed Group';
 	panels: Panel[] = [];
 
 	setOpened(opened: boolean) {
@@ -74,20 +74,21 @@ export class Group {
 }
 
 export class Panel {
+	name;
 	icon = '';
-	name = 'Unknown';
-	slug = 'unknown';
 	description = '';
 	subtitle = '';
 	labels: Label[] = [];
 	blocks: Block[] = [];
-	databaseId: string = 'unknown';
-	collectionId: string = 'unknown';
 	singletonId: string = '';
 	idAttribute: string = '$id';
 	deleteEnabled = true;
 	createEnabled = true;
 	editEnabled = true;
+
+	constructor(public databaseId: string, public collectionId: string, public slug: string) {
+		this.name = slug;
+	}
 
 	setIcon(icon: string) {
 		this.icon = icon;
@@ -115,7 +116,7 @@ export class Panel {
 	}
 
 	addDefaultLabel() {
-		this.labels.push(createLabel().setIcon('🗄️').setName('All').setSlug('').setQueries([]));
+		this.labels.push(createLabel('').setIcon('🗄️').setName('All').setQueries([]));
 		return this;
 	}
 
@@ -168,10 +169,13 @@ export class Panel {
 }
 
 export class Label {
-	icon = '🚧';
-	name = 'Unknown';
-	slug = 'unknown';
+	name;
+	icon = '';
 	queries: string[] = [];
+
+	constructor(public slug: string) {
+		this.name = slug;
+	}
 
 	setIcon(icon: string) {
 		this.icon = icon;
@@ -204,10 +208,15 @@ export class Dashboard {
 }
 
 export class Block {
-	attribute = 'unknown';
 	listInterface: ListInterface = new ListPlaintext();
 	viewInterface: ViewInterface = new ViewPlaintext();
 	editInterface: EditInterface = new EditPlaintext();
+
+	constructor(public attribute: string) {
+		this.listInterface.setName(attribute);
+		this.viewInterface.setName(attribute);
+		this.editInterface.setName(attribute);
+	}
 
 	setAttribute(attribute: string) {
 		this.attribute = attribute;
@@ -218,23 +227,29 @@ export class Block {
 	}
 
 	setListInterface(listInterface: ListInterface) {
+		listInterface.setName(this.attribute);
+
 		this.listInterface = listInterface;
 		return this;
 	}
 
 	setViewInterface(viewInterface: ViewInterface) {
+		viewInterface.setName(this.attribute);
+
 		this.viewInterface = viewInterface;
 		return this;
 	}
 
 	setEditInterface(editInterface: EditInterface) {
+		editInterface.setName(this.attribute);
+
 		this.editInterface = editInterface;
 		return this;
 	}
 }
 
-export function createConfig() {
-	return new Config();
+export function createConfig(endpoint: string, projectId: string) {
+	return new Config(endpoint, projectId);
 }
 
 export function createGroup() {
@@ -245,14 +260,14 @@ export function createDashboard() {
 	return new Dashboard();
 }
 
-export function createPanel() {
-	return new Panel();
+export function createPanel(databaseId: string, collectionId: string, slug: string) {
+	return new Panel(databaseId, collectionId, slug);
 }
 
-export function createLabel() {
-	return new Label();
+export function createLabel(slug: string) {
+	return new Label(slug);
 }
 
-export function createBlock() {
-	return new Block();
+export function createBlock(attribute: string) {
+	return new Block(attribute);
 }

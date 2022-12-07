@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { configStore } from '$lib/stores/config';
 	import { slide } from 'svelte/transition';
+
+	import { page } from '$app/stores';
+	import { PageUtils } from '$lib/utils';
+	$: session = $page.data.session;
+	$: PageUtils.parseAuth(session);
 </script>
 
 <div class="flex w-screen h-screen">

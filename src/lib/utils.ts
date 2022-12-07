@@ -1,12 +1,12 @@
 import { error, redirect } from '@sveltejs/kit';
 import { get } from 'svelte/store';
-import { AppwriteService } from './appwrite.server';
+import { AppwriteService } from './appwrite';
 import type { Group, Panel } from './config.builder';
 import { configStore } from './stores/config';
 
 export const PageUtils = {
-	parseAuth: (locals: any) => {
-		const apiKey = locals.session.data.apiKey;
+	parseAuth: (session: any) => {
+		const apiKey = session.apiKey;
 
 		if (!apiKey) {
 			throw redirect(307, '/');

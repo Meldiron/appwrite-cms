@@ -2,11 +2,11 @@ import { PageUtils } from '$lib/utils';
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 import { error, redirect } from '@sveltejs/kit';
-import { AppwriteService } from '$lib/appwrite.server';
+import { AppwriteService } from '$lib/appwrite';
 
 export const actions: Actions = {
 	default: async ({ params, locals, request }) => {
-		PageUtils.parseAuth(locals);
+		PageUtils.parseAuth(locals.session.data);
 
 		const { panel } = PageUtils.parseParams(params);
 

@@ -3,11 +3,11 @@ import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 import { error, redirect } from '@sveltejs/kit';
 import type { Models } from 'node-appwrite';
-import { AppwriteService } from '$lib/appwrite.server';
+import { AppwriteService } from '$lib/appwrite';
 
 export const actions: Actions = {
 	default: async ({ params, locals, request }) => {
-		PageUtils.parseAuth(locals);
+		PageUtils.parseAuth(locals.session.data);
 
 		const { panel } = PageUtils.parseParams(params);
 		const documentId = params.documentId;
@@ -52,7 +52,7 @@ export const actions: Actions = {
 };
 
 export const load: PageServerLoad = async ({ locals, params }) => {
-	PageUtils.parseAuth(locals);
+	PageUtils.parseAuth(locals.session.data);
 	const { panel, group } = PageUtils.parseParams(params);
 
 	const id = params.documentId;

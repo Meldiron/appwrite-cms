@@ -9,6 +9,7 @@
 	export let panel: Panel;
 	export let group: Group;
 	export let block: Block;
+	export let ready = true;
 </script>
 
-<p style={`color: ${config.color};`}>{value}</p>
+<p>{value}</p>

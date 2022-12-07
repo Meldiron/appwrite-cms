@@ -18,6 +18,10 @@
 			}
 		}
 	}
+
+	const ready: boolean[] = [];
+	$: isSaveDisabled = ready.filter((v) => v === false).length > 0;
+
 </script>
 
 <form method="POST">
@@ -49,8 +53,8 @@
 				</div>
 			</a>
 
-			<button type="submit" class="flex items-center justify-center group">
-				<div class="p-3 text-sm text-white  group-hover:bg-slate-900 rounded-l-md bg-slate-800">
+			<button disabled={isSaveDisabled} type="submit" class="disabled:opacity-50 flex items-center justify-center group">
+				<div class="p-3 text-sm text-white group-hover:bg-slate-900 rounded-l-md bg-slate-800">
 					Save
 				</div>
 				<div class="p-3 text-white  group-hover:bg-black rounded-r-md bg-slate-900">
@@ -73,7 +77,7 @@
 
 	<div class="p-4 text-base">
 		<div class="bg-white p-4 rounded-md flex flex-col space-y-4">
-			{#each panel.blocks as block}
+			{#each panel.blocks as block, index}
 				{#if block.editInterface}
 					{@const value = data.panelDocument[block.attribute]}
 					<div>
@@ -86,6 +90,7 @@
 							{block}
 							document={data.panelDocument}
 							{value}
+							bind:ready={ready[index]}
 						/>
 					</div>
 				{/if}

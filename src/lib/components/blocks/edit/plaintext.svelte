@@ -9,6 +9,7 @@
 	export let panel: Panel;
 	export let group: Group;
 	export let block: Block;
+	export let ready = true;
 
 	let inputValue = value;
 	function onInput(e: any) {

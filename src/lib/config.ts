@@ -1,100 +1,18 @@
-import { Query } from 'node-appwrite';
-import {
-	createBlock,
-	createConfig,
-	createDashboard,
-	createGroup,
-	createLabel,
-	createPanel
-} from './config.builder';
-import {
-	EditBoolean,
-	EditPlaintext,
-	ListBoolean,
-	ListPlaintext,
-	ViewBoolean
-} from './config.interfaces';
+import { createBlock, createConfig, createGroup, createPanel } from "./config.builder";
+import { EditFile, ViewFile } from "./config.interfaces";
 
-export default createConfig()
-	.setEndpoint('https://appwrite.raneurope.eu/v1')
-	.setProjectId('appwriteCms')
-	.setName('Almost Blog')
-	.setIcon('✏️')
-	.setDashboard(createDashboard().setMotd('Welcome to the CMS 👋'))
+export default createConfig('https://cloud.appwrite.io/v1', 'appwrite')
 	.addGroup(
 		createGroup()
-			.setName('Default')
-			.setIcon('🧱')
-			.setOpened(true)
 			.addPanel(
-				createPanel()
-					.setName('Articles')
-					.setIcon('📚')
-					.setSlug('articles')
-					.setDatabaseId('default')
-					.setCollectionId('articles')
-					.addDefaultLabel()
-					.addLabel(
-						createLabel()
-							.setName('Drafts')
-							.setIcon('🖇️')
-							.setSlug('drafts')
-							.setQueries([Query.equal('status', 'draft')])
-					)
-					.addLabel(
-						createLabel()
-							.setName('Published')
-							.setIcon('⚡')
-							.setSlug('published')
-							.setQueries([Query.equal('status', 'published')])
+				createPanel('main', 'articles', 'my-articles-slug')
+					.addBlock(
+						createBlock('title')
 					)
 					.addBlock(
-						createBlock()
-							.setAttribute('author')
-							.setListInterface(new ListPlaintext().setWidth('150px').setName('Autor'))
+						createBlock('text')
+							.setEditInterface(new EditFile('b1'))
+							.setViewInterface(new ViewFile('b1'))
 					)
-					.addBlock(
-						createBlock()
-							.setAttribute('title')
-							.setListInterface(new ListPlaintext().setName('Nadpis'))
-					)
-			)
-			.addPanel(
-				createPanel()
-					.setName('Newsletters')
-					.setSlug('newsletters')
-					.setDatabaseId('default')
-					.setCollectionId('newsletters')
-					.setIdAttribute('email')
-					.addBlock(
-						createBlock()
-							.setAttribute('email')
-							.setEditInterface(
-								new EditPlaintext()
-									.setName('E-mail')
-									.setPlaceholder('Subscriber e-mail')
-									.setType('email')
-							)
-					)
-					.addBlock(
-						createBlock()
-							.setAttribute('confirmed')
-							.setViewInterface(new ViewBoolean().setName('Is Confirmed'))
-							.setListInterface(new ListBoolean().setWidth('150px').setName('Confirmed?'))
-							.setEditInterface(new EditBoolean().setName('Is Confirmed'))
-					)
-			)
-			.addPanel(
-				createPanel()
-					.setIcon('⚙️')
-					.setName('Settings')
-					.setDatabaseId('default')
-					.setCollectionId('settings')
-					.setSingletonId('default')
-					.setSlug('settings')
-					.addBlock(createBlock().setAttribute('footerText'))
-					.addBlock(createBlock().setAttribute('pageDescription'))
-					.addBlock(createBlock().setAttribute('name'))
-					.addBlock(createBlock().setAttribute('pageTitle'))
 			)
 	);

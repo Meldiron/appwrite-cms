@@ -1,4 +1,4 @@
-import { AppwriteService } from '$lib/appwrite.server';
+import { AppwriteService } from '$lib/appwrite';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
@@ -7,7 +7,7 @@ import { PageUtils } from '$lib/utils';
 
 export const actions: Actions = {
 	deleteDocument: async ({ locals, request }) => {
-		PageUtils.parseAuth(locals);
+		PageUtils.parseAuth(locals.session.data);
 
 		const data = await request.formData();
 
@@ -34,7 +34,7 @@ export const actions: Actions = {
 };
 
 export const load: PageServerLoad = async ({ locals, params, url }) => {
-	PageUtils.parseAuth(locals);
+	PageUtils.parseAuth(locals.session.data);
 
 	const { panel, group } = PageUtils.parseParams(params);
 

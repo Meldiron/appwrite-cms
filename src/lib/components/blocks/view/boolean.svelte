@@ -9,6 +9,7 @@
 	export let panel: Panel;
 	export let group: Group;
 	export let block: Block;
+	export let ready = true;
 </script>
 
 <p>{value === true ? 'Yes' : value === false ? 'No' : 'None'}</p>
