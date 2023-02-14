@@ -12,9 +12,7 @@ export const actions: Actions = {
 		if (!inputNickname || !inputPassword) {
 			return json({ msg: 'Please enter nickname and password.' });
 		}
-		console.log(process.env.SECRET_AUTH_USERS)
 		const users = SECRET_AUTH_USERS;
-
 		for (const user of users.split(',')) {
 			const [auth, key] = user.split('@');
 			const [nickname, password] = auth.split(':');

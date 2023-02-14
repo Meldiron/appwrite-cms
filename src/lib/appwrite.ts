@@ -33,7 +33,7 @@ export const AppwriteService = {
 		client.setEndpoint(endpoint).setProject(projectId).setKey(apiKey);
 		clientBrowser.setEndpoint(endpoint).setProject(projectId);
 
-		clientBrowser.headers['x-appwrite-key'] = apiKey;
+		clientBrowser.headers['X-Appwrite-Key'] = apiKey;
 	},
 	listDocuments: async <T extends Models.Document>(
 		databaseId: string,
