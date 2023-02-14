@@ -1,5 +1,5 @@
 import type { Actions } from './$types';
-import { invalid, redirect } from '@sveltejs/kit';
+import { redirect, json} from '@sveltejs/kit';
 import { SECRET_AUTH_USERS } from '$env/static/private';
 
 export const actions: Actions = {
@@ -10,9 +10,9 @@ export const actions: Actions = {
 		const inputPassword = data.get('password');
 
 		if (!inputNickname || !inputPassword) {
-			return invalid(400, { msg: 'Please enter nickname and password.' });
+			return json({ msg: 'Please enter nickname and password.' });
 		}
-
+		console.log(process.env.SECRET_AUTH_USERS)
 		const users = SECRET_AUTH_USERS;
 
 		for (const user of users.split(',')) {
@@ -28,6 +28,6 @@ export const actions: Actions = {
 			}
 		}
 
-		return invalid(400, { msg: 'Wrong nickname or password.' });
+		return json({ msg: 'Wrong nickname or password.' });
 	}
 };
