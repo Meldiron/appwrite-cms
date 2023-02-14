@@ -8,8 +8,8 @@ import {
 } from './config.interfaces';
 
 export class Config {
-	icon = '💫';
-	name = 'Unnamed CMS';
+	icon = '☕';
+	name = 'Kantin Admin';
 	groups: Group[] = [];
 	dashboard: Dashboard = new Dashboard();
 

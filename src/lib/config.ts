@@ -1,18 +1,40 @@
-import { createBlock, createConfig, createGroup, createPanel } from "./config.builder";
-import { EditFile, ViewFile } from "./config.interfaces";
+	import { EditFile, ViewFile } from '$lib/config.interfaces';
+	import {
+	  createBlock,
+	  createConfig,
+	  createGroup,
+	  createPanel
+	} from './config.builder';
+	
 
-export default createConfig('https://cloud.appwrite.io/v1', 'appwrite')
-	.addGroup(
+	export default createConfig(
+	  'https://api.kantin.shop/v1',
+	  '6383d2113a051df427b3',
+	)
+	  .setName('Kantin')
+	  .addGroup(
 		createGroup()
-			.addPanel(
-				createPanel('main', 'articles', 'my-articles-slug')
-					.addBlock(
-						createBlock('title')
-					)
-					.addBlock(
-						createBlock('text')
-							.setEditInterface(new EditFile('b1'))
-							.setViewInterface(new ViewFile('b1'))
-					)
-			)
-	);
+		  .setName('My Store')
+		  .addPanel(
+			createPanel('Store', 'Products', 'Products')
+			.setIcon('🍩')
+			  .addBlock(createBlock('title'))
+			  .addBlock(createBlock('price'))
+			  .addBlock(createBlock('description'))
+			  .addBlock(createBlock('category'))
+			  .addBlock(
+				createBlock('image').setEditInterface(
+				  new EditFile('ProductImages')
+				)
+							.setViewInterface(new ViewFile('ProductImages'))
+			  ),
+		  )
+		  .addPanel(
+			createPanel('Store', 'Discounts', 'Discounts')
+			.setIcon('🏷️')
+			  .addBlock(createBlock('userId'))
+			  .addBlock(createBlock('email'))
+			  .addBlock(createBlock('discount')),
+		  ),
+	  );
+	
