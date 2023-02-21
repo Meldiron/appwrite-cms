@@ -9,3 +9,4 @@ export const load: PageServerLoad = async ({ locals }) => {
 	PageUtils.parseAuth(locals.session.data);
 	return {};
 };
+

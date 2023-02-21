@@ -3,6 +3,7 @@ import { PageUtils } from '$lib/utils';
 import { error } from '@sveltejs/kit';
 import type { Models } from 'node-appwrite';
 import type { PageServerLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	PageUtils.parseAuth(locals.session.data);
@@ -32,3 +33,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		throw error(500, { message: 'Could not load document: ' + err.message });
 	}
 };
+
+export const actions = {
+	default: () => {
+		return ;
+	}
+  };

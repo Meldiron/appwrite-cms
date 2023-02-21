@@ -2,6 +2,7 @@
 	import Navbar from '$lib/components/navbar.svelte';
 	import type { Group, Panel } from '$lib/config.builder';
 	import { configStore } from '$lib/stores/config';
+	import { set_input_type } from 'svelte/internal';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

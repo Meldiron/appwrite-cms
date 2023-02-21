@@ -5,6 +5,7 @@ import ViewBooleanEl from '$lib/components/blocks/view/boolean.svelte';
 import ViewFileEl from '$lib/components/blocks/view/file.svelte';
 import EditPlaintextEl from '$lib/components/blocks/edit/plaintext.svelte';
 import EditBooleanEl from '$lib/components/blocks/edit/boolean.svelte';
+import EditDropdownEl from '$lib/components/blocks/edit/dropdown.svelte';
 import EditFileEl from '$lib/components/blocks/edit/file.svelte';
 
 export abstract class ListInterface {
@@ -102,6 +103,25 @@ export class EditBoolean extends EditInterface {
 	constructor() {
 		super();
 		this.element = EditBooleanEl;
+	}
+}
+
+export class EditDropdown extends EditInterface {
+	constructor() {
+		super();
+		this.element = EditDropdownEl;
+	}
+	options: string[] = []
+	placeholder = '';
+
+	setPlaceholder(placeholder: string) {
+		this.placeholder = placeholder;
+		return this;
+	}
+
+	setOptions(options: string[]) {
+		this.options = options;
+		return this;
 	}
 }
 

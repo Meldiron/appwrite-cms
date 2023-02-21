@@ -1,4 +1,4 @@
-	import { EditFile, ViewFile } from '$lib/config.interfaces';
+	import { EditFile, ViewFile, EditDropdown } from '$lib/config.interfaces';
 	import {
 	  createBlock,
 	  createConfig,
@@ -21,7 +21,7 @@
 			  .addBlock(createBlock('title'))
 			  .addBlock(createBlock('price'))
 			  .addBlock(createBlock('description'))
-			  .addBlock(createBlock('category'))
+			  .addBlock(createBlock('category').setEditInterface(new EditDropdown().setOptions(['drinks', 'health', 'snacks', 'other'])))
 			  .addBlock(
 				createBlock('image').setEditInterface(
 				  new EditFile('ProductImages')
