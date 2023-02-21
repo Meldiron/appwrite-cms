@@ -1,0 +1,10 @@
+.svelte-kit
+appwrite
+build
+node_modules
+.eslintignore
+.eslintrc.cjs
+.gitignore
+.prettierignore
+.prettierrc
+*.md
