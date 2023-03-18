@@ -1,8 +1,26 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { AppwriteService } from '$lib/appwrite';
+	import { authStore } from '$lib/stores/auth';
 	import { configStore } from '$lib/stores/config';
-	import type { ActionData } from './$types';
 
-	export let form: ActionData;
+	let email = '';
+	let password = '';
+
+	let formMsg = '';
+
+	async function onLoginSubmit() {
+		try {
+			await AppwriteService.login(email, password);
+
+			const account = await AppwriteService.getAccount();
+			authStore.set(account);
+
+			goto('/app');
+		} catch(err: any) {
+			formMsg = err.message;
+		}
+	}
 </script>
 
 <div
@@ -21,17 +39,17 @@
 			<div class="mt-14">
 				<h1 class="text-3xl font-semibold text-center text-black">{$configStore.name}</h1>
 
-				<form class="flex flex-col my-8 space-y-4" method="POST">
+				<form on:submit|preventDefault={onLoginSubmit} class="flex flex-col my-8 space-y-4">
 					<input
+						bind:value={email}
 						required={true}
-						name="nickname"
 						class="p-4 bg-white border-4 rounded-md  border-slate-200 focus:outline-none focus:ring ring-gray-600"
 						type="text"
-						placeholder="Nickname"
+						placeholder="E-mail"
 					/>
 					<input
+					bind:value={password}
 						required={true}
-						name="password"
 						class="p-4 bg-white border-4 rounded-md  border-slate-200 focus:outline-none focus:ring ring-gray-600"
 						type="password"
 						placeholder="Password"
@@ -43,8 +61,8 @@
 						<span>Login</span>
 					</button>
 
-					{#if form?.msg}
-						<p class="text-red-500 text-center">{form.msg}</p>
+					{#if formMsg}
+						<p class="text-red-500 text-center">{formMsg}</p>
 					{/if}
 
 					<div class="flex flex-col items-center pt-4 space-y-1 text-xs  text-slate-300">

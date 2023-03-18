@@ -5,6 +5,9 @@
 	import { configStore } from '$lib/stores/config';
 	import type { PageData } from './$types';
 	import { page } from '$app/stores';
+	import { AppwriteService } from '$lib/appwrite';
+	import type { Models } from 'appwrite';
+	import { invalidateAll } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -62,14 +65,39 @@
 		const currentPage = data.panelPage;
 
 		pages = [];
-		pages.push(firstPage);
-		pages.push(lastPage);
-		pages.push(currentPage - 1);
-		pages.push(currentPage + 1);
-		pages = pages.filter((p) => p >= firstPage && p <= lastPage);
-		pages.push(currentPage);
 
-		pages = [...new Set(pages)];
+		let middlePages = [];
+		middlePages.push(currentPage - 1);
+		middlePages.push(currentPage + 1);
+		middlePages.push(currentPage);
+		middlePages = middlePages.filter((p) => p > firstPage && p < lastPage);
+		middlePages = middlePages.sort((a, b) => (a < b ? -1 : 1));
+
+		pages.push(firstPage);
+		if (middlePages[0] !== firstPage + 1) {
+			pages.push(-1);
+		}
+		pages.push(...middlePages);
+		if (middlePages[middlePages.length - 1] !== lastPage - 1) {
+			pages.push(-1);
+		}
+		pages.push(lastPage);
+
+		if (middlePages.length === 0) {
+			pages = [firstPage, lastPage];
+		}
+
+		if (firstPage === lastPage) {
+			pages = [firstPage];
+		}
+	}
+
+	async function onDelete(panel: Panel, document: Models.Document) {
+		if (confirm('Are you sure to delete?')) {
+			await AppwriteService.deleteDocument(panel.databaseId, panel.collectionId, document.$id);
+
+			await invalidateAll();
+		}
 	}
 </script>
 
@@ -246,29 +274,24 @@
 									{/if}
 
 									{#if panel.deleteEnabled}
-										<form action="?/deleteDocument" method="POST" use:enhance>
-											<input type="hidden" name="documentId" value={document.$id} />
-											<input type="hidden" name="databaseId" value={panel.databaseId} />
-											<input type="hidden" name="collectionId" value={panel.collectionId} />
-
-											<button
-												type="submit"
-												class="p-2 rounded-md text-red-800 bg-red-200 rounded-mdp hover:bg-red-300"
+										<button
+											on:click={() => onDelete(panel, document)}
+											type="button"
+											class="p-2 rounded-md text-red-800 bg-red-200 rounded-mdp hover:bg-red-300"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="w-4 h-4"
+												viewBox="0 0 20 20"
+												fill="currentColor"
 											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													class="w-4 h-4"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														fill-rule="evenodd"
-														d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-														clip-rule="evenodd"
-													/>
-												</svg>
-											</button>
-										</form>
+												<path
+													fill-rule="evenodd"
+													d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+													clip-rule="evenodd"
+												/>
+											</svg>
+										</button>
 									{/if}
 								</td>
 
@@ -318,12 +341,16 @@
 
 			<div class="flex space-x-1">
 				{#each pages as page}
-					<a
-						href={getSearch(search, 'page', page.toString())}
-						class={`p-1 px-3 rounded-md ${
-							data.panelPage === page ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-900'
-						}`}>{page}</a
-					>
+					{#if page === -1}
+						<p class="text-slate-400 font-bold">...</p>
+					{:else}
+						<a
+							href={getSearch(search, 'page', page.toString())}
+							class={`p-1 px-3 rounded-md ${
+								data.panelPage === page ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-900'
+							}`}>{page}</a
+						>
+					{/if}
 				{/each}
 			</div>
 		</div>

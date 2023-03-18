@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { AppwriteService } from '$lib/appwrite';
 	import Navbar from '$lib/components/navbar.svelte';
 	import type { Group, Panel } from '$lib/config.builder';
 	import { configStore } from '$lib/stores/config';
+	import { ID } from 'appwrite';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -18,9 +21,48 @@
 			}
 		}
 	}
+
+	async function onCreate(e: any) {
+		const json: any = {};
+
+		let id = ID.unique();
+
+		const formData = new FormData(e.target);
+		for (let field of formData) {
+			const key: any = field[0];
+			let value: any = field[1];
+
+			if(key === '$id') {
+				id = value;
+			}
+
+			if (value == 'xempty' || key.startsWith('$')) {
+				continue;
+			}
+
+			if (value === 'xtrue') {
+				value = true;
+			}
+
+			if (value === 'xfalse') {
+				value = false;
+			}
+
+			json[key] = value;
+		}
+
+		const document = await AppwriteService.createDocument(
+			panel.databaseId,
+			panel.collectionId,
+			id,
+			json
+		);
+
+		goto(`/app/panels/${panel.slug}/view/${document.$id}`);
+	}
 </script>
 
-<form method="POST">
+<form on:submit|preventDefault={onCreate}>
 	<Navbar title={'New Record'} icon="🖋️">
 		<div class="flex items-center justify-end space-x-4">
 			<a href={`/app/panels/${panel.slug}`} class="flex items-center justify-center group">

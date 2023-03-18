@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Block, Group, Panel } from '$lib/config.builder';
 	import type { EditBoolean } from '$lib/config.interfaces';
-	import type { Models } from 'node-appwrite';
+	import type { Models } from 'appwrite';
 
 	export let config: EditBoolean;
 	export let document: (any & Models.Document) | null;
@@ -10,6 +10,9 @@
 	export let group: Group;
 	export let block: Block;
 	export let ready = true;
+
+	// Prevents compilation errors
+	config; document; value; panel; group; block; ready;
 
 	$: formValue = value === true ? 'xtrue' : value === false ? 'xfalse' : 'xempty';
 </script>

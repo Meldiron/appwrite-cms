@@ -3,7 +3,7 @@
 	import { AppwriteService } from '$lib/appwrite';
 	import type { Block, Group, Panel } from '$lib/config.builder';
 	import type { ViewFile } from '$lib/config.interfaces';
-	import type { Models } from 'node-appwrite';
+	import type { Models } from 'appwrite';
 	import { onMount } from 'svelte';
 
 	export let config: ViewFile;
@@ -13,6 +13,9 @@
 	export let group: Group;
 	export let block: Block;
 	export let ready = true;
+	
+	// Prevents compilation errors
+	config; document; value; panel; group; block; ready;
 
 	let src = '';
 

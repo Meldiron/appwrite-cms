@@ -1,18 +1,10 @@
-import { createBlock, createConfig, createGroup, createPanel } from "./config.builder";
-import { EditFile, ViewFile } from "./config.interfaces";
+import { createBlock, createConfig, createGroup, createPanel } from './config.builder';
 
-export default createConfig('https://cloud.appwrite.io/v1', 'appwrite')
-	.addGroup(
-		createGroup()
-			.addPanel(
-				createPanel('main', 'articles', 'my-articles-slug')
-					.addBlock(
-						createBlock('title')
-					)
-					.addBlock(
-						createBlock('text')
-							.setEditInterface(new EditFile('b1'))
-							.setViewInterface(new ViewFile('b1'))
-					)
-			)
-	);
+export default createConfig('https://cloud.appwrite.io/v1', 'techCrunchs').addGroup(
+	createGroup().addPanel(
+		createPanel('default', 'categories')
+			.addIdBlock()
+			.addBlock(createBlock('name'))
+			.addBlock(createBlock('description'))
+	)
+);

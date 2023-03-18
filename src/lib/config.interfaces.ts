@@ -86,6 +86,8 @@ export class EditPlaintext extends EditInterface {
 
 	placeholder = '';
 	type = 'text';
+	editDisabled = false;
+	createValue = '';
 
 	setPlaceholder(placeholder: string) {
 		this.placeholder = placeholder;
@@ -94,6 +96,16 @@ export class EditPlaintext extends EditInterface {
 
 	setType(type: string) {
 		this.type = type;
+		return this;
+	}
+
+	setEditDisabled(disabled: boolean) {
+		this.editDisabled = disabled;
+		return this;
+	}
+
+	setCreateValue(value: string) {
+		this.createValue = value;
 		return this;
 	}
 }

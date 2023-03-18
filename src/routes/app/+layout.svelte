@@ -1,11 +1,15 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { AppwriteService } from '$lib/appwrite';
+	import { authStore } from '$lib/stores/auth';
 	import { configStore } from '$lib/stores/config';
 	import { slide } from 'svelte/transition';
 
-	import { page } from '$app/stores';
-	import { PageUtils } from '$lib/utils';
-	$: session = $page.data.session;
-	$: PageUtils.parseAuth(session);
+	async function onLogout() {
+		await AppwriteService.logout();
+		authStore.set(null);
+		goto('/auth/login');
+	}
 </script>
 
 <div class="flex w-screen h-screen">
@@ -92,14 +96,15 @@
 			</div>
 		</div>
 
-		<form action="/app?/logout" method="POST" class="p-3">
+		<div class="p-3">
 			<button
-				type="submit"
+				type="button"
+				on:click={onLogout}
 				class="flex items-center justify-center w-full p-3 space-x-3 text-center text-red-500 hover:text-red-400"
 			>
 				<span> Logout </span>
 			</button>
-		</form>
+		</div>
 	</div>
 
 	<div class="w-full h-full overflow-y-auto from-slate-100 to-slate-50 bg-gradient-to-b">

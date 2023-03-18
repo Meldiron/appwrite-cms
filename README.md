@@ -29,11 +29,8 @@ Thanks for your attention open source community! See you later in GitHub issues 
 > Before using, make sure you have Appwrite server running and you have a project.
 
 1. Fork Appwrite CMS
-2. Copy `.env.example` to `.env` (or setup environment variables on your hosting provider)
-   - `SECRET_SESSION_SECRET` should be random string, at least 32 chars long. Used to encrypt sessions
-   - `SECRET_AUTH_USERS` should be comma-separated list of users. Each user includes login credentials and Appwrite API key they should be using. **API Key** must have `documents.read` and `documents.write` scopes (from `databases` category)
-3. Edit whole file `src/lib/config.ts`. Feel free to keep backup of original content, that is an example configuration for a [Almost Blog](https://github.com/TringuG/almost-blog). To learn more about this config file, read documentation below.
-4. You are all set and ready to use Appwrite CMS ✨
+2. Edit whole file `src/lib/config.ts`. To learn more about this config file, read documentation below.
+3. You are all set and ready to use Appwrite CMS ✨ To log in, create user in your Appwrite project.
 
 ## 📚 Documentation
 

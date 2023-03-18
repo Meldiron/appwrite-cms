@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto, invalidateAll } from '$app/navigation';
+	import { AppwriteService } from '$lib/appwrite';
 	import Navbar from '$lib/components/navbar.svelte';
 	import type { Group, Panel } from '$lib/config.builder';
 	import { configStore } from '$lib/stores/config';
@@ -22,9 +24,41 @@
 	const ready: boolean[] = [];
 	$: isSaveDisabled = ready.filter((v) => v === false).length > 0;
 
+	async function onUpdate(e: any) {
+		const json: any = {};
+
+		const formData = new FormData(e.target);
+		for (let field of formData) {
+			const key: any = field[0];
+			let value: any = field[1];
+
+			if (value == 'xempty' || key.startsWith('$')) {
+				continue;
+			}
+
+			if (value === 'xtrue') {
+				value = true;
+			}
+
+			if (value === 'xfalse') {
+				value = false;
+			}
+
+			json[key] = value;
+		}
+
+		await AppwriteService.updateDocument(
+			panel.databaseId,
+			panel.collectionId,
+			data.panelDocument.$id,
+			json
+		);
+
+		goto(`/app/panels/${panel.slug}/view/${data.panelDocument.$id}`);
+	}
 </script>
 
-<form method="POST">
+<form on:submit|preventDefault={onUpdate}>
 	<Navbar
 		title={'Edit Record'}
 		description={panel.idAttribute === '$id'
@@ -53,7 +87,11 @@
 				</div>
 			</a>
 
-			<button disabled={isSaveDisabled} type="submit" class="disabled:opacity-50 flex items-center justify-center group">
+			<button
+				disabled={isSaveDisabled}
+				type="submit"
+				class="disabled:opacity-50 flex items-center justify-center group"
+			>
 				<div class="p-3 text-sm text-white group-hover:bg-slate-900 rounded-l-md bg-slate-800">
 					Save
 				</div>

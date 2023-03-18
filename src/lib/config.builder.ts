@@ -8,12 +8,14 @@ import {
 } from './config.interfaces';
 
 export class Config {
-	icon = '💫';
-	name = 'Unnamed CMS';
+	icon = '👋';
+	name;
 	groups: Group[] = [];
 	dashboard: Dashboard = new Dashboard();
 
-	constructor(public endpoint: string, public projectId: string) {}
+	constructor(public endpoint: string, public projectId: string) {
+		this.name = projectId;
+	}
 
 	setIcon(icon: string) {
 		this.icon = icon;
@@ -47,7 +49,7 @@ export class Config {
 }
 
 export class Group {
-	opened = false;
+	opened = true;
 	icon = '';
 	name = 'Unnamed Group';
 	panels: Panel[] = [];
@@ -75,6 +77,8 @@ export class Group {
 
 export class Panel {
 	name;
+	slug;
+
 	icon = '';
 	description = '';
 	subtitle = '';
@@ -86,8 +90,9 @@ export class Panel {
 	createEnabled = true;
 	editEnabled = true;
 
-	constructor(public databaseId: string, public collectionId: string, public slug: string) {
-		this.name = slug;
+	constructor(public databaseId: string, public collectionId: string) {
+		this.name = `${databaseId}-${collectionId}`;
+		this.slug = this.name;
 	}
 
 	setIcon(icon: string) {
@@ -127,6 +132,16 @@ export class Panel {
 
 	addBlock(block: Block) {
 		this.blocks.push(block);
+		return this;
+	}
+
+	addIdBlock() {
+		this.addBlock(
+			createBlock('$id').setEditInterface(
+				new EditPlaintext().setEditDisabled(true).setCreateValue('unique()')
+			)
+		);
+
 		return this;
 	}
 
@@ -184,11 +199,6 @@ export class Label {
 
 	setName(name: string) {
 		this.name = name;
-		return this;
-	}
-
-	setSlug(slug: string) {
-		this.slug = slug;
 		return this;
 	}
 
@@ -260,8 +270,8 @@ export function createDashboard() {
 	return new Dashboard();
 }
 
-export function createPanel(databaseId: string, collectionId: string, slug: string) {
-	return new Panel(databaseId, collectionId, slug);
+export function createPanel(databaseId: string, collectionId: string) {
+	return new Panel(databaseId, collectionId);
 }
 
 export function createLabel(slug: string) {

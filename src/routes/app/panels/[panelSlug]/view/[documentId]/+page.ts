@@ -1,12 +1,11 @@
 import { AppwriteService } from '$lib/appwrite';
 import { PageUtils } from '$lib/utils';
 import { error } from '@sveltejs/kit';
-import type { Models } from 'node-appwrite';
-import type { PageServerLoad } from './$types';
+import type { Models } from 'appwrite';
+import type { PageLoad } from './$types';
 
-export const load: PageServerLoad = async ({ locals, params }) => {
-	PageUtils.parseAuth(locals.session.data);
-	const { panel, group } = PageUtils.parseParams(params);
+export const load: PageLoad = async ({ params }) => {
+	const { panel, group } = PageUtils.parseParams(params.panelSlug);
 
 	const id = params.documentId;
 
